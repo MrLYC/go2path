@@ -1,6 +1,7 @@
 # go2path
 
-Link your project under gopath in all operate systems!
+Link your project under gopath in all operate systems!  
+**you should run command as administrator on Windows.**
 
 ## feature
 
