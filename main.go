@@ -21,7 +21,14 @@ func getLastGoPath(gopath string) string {
 		return ""
 	}
 
-	return pathList[len(pathList)-1]
+	target := pathList[0]
+	for i := 1; i < len(pathList); i++ {
+		if pathList[i] != "" {
+			target = pathList[i]
+		}
+	}
+
+	return target
 }
 
 func main() {
