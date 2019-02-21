@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"runtime"
 )
 
 func checkError(err error) {
@@ -67,7 +68,16 @@ func main() {
 		}
 	}
 
+	code := 1
 	err = os.Symlink(projectRoot, projectLink)
-	checkError(err)
-	fmt.Printf("create link %s -> %s\n", projectLink, projectRoot)
+	if err == nil {
+		fmt.Printf("create link %s -> %s\n", projectLink, projectRoot)
+		code = 0
+	} else if runtime.GOOS == "windows" {
+		fmt.Printf("create link failed: %v, are you run as administrator?\n", err)
+	} else {
+		fmt.Printf("create link failed: %v\n", err)
+	}
+
+	os.Exit(code)
 }
